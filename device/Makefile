@@ -11,7 +11,7 @@ main.elf: main.o usbdrv/usbdrvasm.o usbdrv/usbdrv.o
 	$(CC) -mmcu=atmega328p -o main.elf usbdrv/usbdrv.o usbdrv/usbdrvasm.o main.o
 
 usbdrv/usbdrvasm.o: usbdrv/usbdrvasm.S
-	$(CC) $(CFLAGS) -x assembler-with-cpp -o usbdrv/usbdrvasm.o usbdrv/usbdrvasm.S
+	$(CC) $(CFLAGS) -o usbdrv/usbdrvasm.o usbdrv/usbdrvasm.S
 
 usbdrv/usbdrv.o: usbdrv/usbdrv.c usbdrv/usbconfig.h
 	$(CC) $(CFLAGS) -o usbdrv/usbdrv.o usbdrv/usbdrv.c
