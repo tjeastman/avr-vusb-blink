@@ -17,7 +17,7 @@ usbdrv/usbdrv.o: usbdrv/usbdrv.c usbdrv/usbconfig.h
 	$(CC) $(CFLAGS) -o usbdrv/usbdrv.o usbdrv/usbdrv.c
 
 main.o: main.c
-	$(CC) $(CFLAGS) -Iusbdrv main.c
+	$(CC) $(CFLAGS) -Iusbdrv -o main.o main.c
 
 flash: main.hex
 	avrdude -p m328p -c usbtiny -P usb -U flash:w:main.hex
