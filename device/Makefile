@@ -11,16 +11,16 @@ main.elf: main.o usbdrv/usbdrvasm.o usbdrv/usbdrv.o usbdrv/oddebug.o
 	$(CC) -mmcu=atmega328p -o main.elf usbdrv/usbdrv.o usbdrv/oddebug.o usbdrv/usbdrvasm.o main.o
 
 usbdrv/usbdrvasm.o: usbdrv/usbdrvasm.S
-	$(CC) $(CFLAGS) -x assembler-with-cpp -c usbdrv/usbdrvasm.S -o usbdrv/usbdrvasm.o
+	$(CC) $(CFLAGS) -c -x assembler-with-cpp -o usbdrv/usbdrvasm.o usbdrv/usbdrvasm.S
 
 usbdrv/usbdrv.o: usbdrv/usbdrv.c usbdrv/usbconfig.h
-	$(CC) $(CFLAGS) -c usbdrv/usbdrv.c -o usbdrv/usbdrv.o
+	$(CC) $(CFLAGS) -c -o usbdrv/usbdrv.o usbdrv/usbdrv.c
 
 usbdrv/oddebug.o: usbdrv/oddebug.c
-	$(CC) $(CFLAGS) -c usbdrv/oddebug.c -o usbdrv/oddebug.o
+	$(CC) $(CFLAGS) -c -o usbdrv/oddebug.o usbdrv/oddebug.c
 
 main.o: main.c
-	$(CC) $(CFLAGS) -Iusbdrv -c main.c
+	$(CC) $(CFLAGS) -c -Iusbdrv main.c
 
 flash: main.hex
 	avrdude -p m328p -c usbtiny -P usb -U flash:w:main.hex
